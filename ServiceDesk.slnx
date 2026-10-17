@@ -1,0 +1,7 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+    <Platform Name="x86" />
+  </Configurations>
+  <Project Path="ServiceDesk/ServiceDesk.vcxproj" Id="dc636741-ab04-43bd-bcac-06b81de83f76" />
+</Solution>
