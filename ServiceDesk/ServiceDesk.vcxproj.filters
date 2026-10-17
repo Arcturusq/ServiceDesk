@@ -21,9 +21,15 @@
     <ClCompile Include="OrderConverter.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="TelegramBot.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="OrderConverter.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="TelegramBot.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

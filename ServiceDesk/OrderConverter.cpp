@@ -193,7 +193,20 @@ size_t OrderConverter::findTailStart(const std::string& block)
 	return std::string::npos;
 }
 
-// Разбивает текст на блоки: новый блок начинается со строки «Заказ ...»
+// Строка-начало блока: «Заказ ...» (текстовый журнал) или «ЗАЯВКА ...» (из Telegram)
+bool OrderConverter::isBlockStart(const std::string& low)
+{
+	for (const char* word : { "заказ", "заявка" })
+	{
+		size_t n = strlen(word);
+		if (low.compare(0, n, word) == 0 &&
+			(low.size() == n || !isWordByte((unsigned char)low[n])))
+			return true;
+	}
+	return false;
+}
+
+// Разбивает текст на блоки: новый блок начинается со строки «Заказ ...» / «ЗАЯВКА ...»
 std::vector<std::string> OrderConverter::splitBlocks(const std::string& text)
 {
 	std::vector<std::string> blocks;
@@ -203,9 +216,7 @@ std::vector<std::string> OrderConverter::splitBlocks(const std::string& text)
 	{
 		std::string line = trim(rawLine);
 		std::string low = toLowerUtf8(line);
-		const std::string startWord = "заказ";
-		bool isNew = low.compare(0, startWord.size(), startWord) == 0 &&
-			(low.size() == startWord.size() || !isWordByte((unsigned char)low[startWord.size()]));
+		bool isNew = isBlockStart(low);
 		if (isNew && currentStarted)
 		{
 			blocks.push_back(current);

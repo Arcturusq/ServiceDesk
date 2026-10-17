@@ -49,7 +49,8 @@ private:
 	static size_t matchKeyword(const std::string& low);   // длина метки в начале строки, иначе 0
 	static bool lineStartsWithKeyword(const std::string& line);
 	static size_t findTailStart(const std::string& block); // позиция начала «хвоста» с метками
-	static std::vector<std::string> splitBlocks(const std::string& text); // текст -> блоки «Заказ ...»
+	static bool isBlockStart(const std::string& low);      // строка «Заказ ...» / «ЗАЯВКА ...»
+	static std::vector<std::string> splitBlocks(const std::string& text); // текст -> блоки
 	static std::string valueAfter(size_t len, const std::string& line);
 	static std::string expandThousands(const std::string& value); // «7к» -> «7000»
 	static bool isMoneyLabel(const std::string& label);
